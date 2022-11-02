@@ -10,6 +10,7 @@ class UserController < ApplicationController
   end
 
   def create
+    @cities = City.all
 
     @user = User.new(
       first_name: params[:first_name],
@@ -17,12 +18,12 @@ class UserController < ApplicationController
       email: params[:email],
       password: params[:password],
       age: params[:age],
-      city_id: City.find_by(name: params[:city]).id,
+      city_id: params[:city].to_i,
       description: params[:description]
     )
-
+    
     if @user.save
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
       redirect_to root_path
     else
       render :new

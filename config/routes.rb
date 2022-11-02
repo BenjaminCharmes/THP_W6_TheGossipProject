@@ -12,9 +12,6 @@ Rails.application.routes.draw do
     resources :comment
   end
 
-  # Controller Comment
-  
-
   # Controller User
   resources :user
 
@@ -23,6 +20,9 @@ Rails.application.routes.draw do
 
   # Controller Sessions
   resources :sessions, only: [:new, :create, :destroy]
+
+  # Controller Like
+  resources :like, only: [:index, :new, :create, :destroy]
 
   # URL cachée
   get '/welcome/:first_name', to: 'welcome#home', as: 'welcome_home'
