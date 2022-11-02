@@ -1,0 +1,14 @@
+<h1>Bienvenue sur la page de la ville de <%= @city.name %> !</h1><br>
+<p>
+Voici la liste des gossips ayant été écrit par des utilisateurs habitant à <%= @city.name %>
+</p>
+<% @city.gossips.each do |gossip| %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= gossip.title %></h5>
+      <p class="card-text">Écrit par: <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
+      <%= button_to "Lire ce gossip", gossip_path(gossip.id), :method => "get" %>
+    </div>
+  </div>
+  <hr/>
+<% end %>

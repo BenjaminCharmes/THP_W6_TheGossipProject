@@ -1,0 +1,15 @@
+<h1>Bienvenue sur la page de <%= @user.first_name %> !</h1>
+<p>
+Nom: <%= @user.first_name + " " + @user.last_name %>
+</p>
+<p>
+Description: <%= @user.description %>
+</p>
+<p>
+Email: <%= @user.email %><br/>
+Âge: <%= @user.age %> ans<br/>
+Ville: <%= link_to "#{@user.city.name}", city_path(@user.city_id) %>
+</p>
+<p>
+Créé le: <%= @user.created_at %>
+</p>

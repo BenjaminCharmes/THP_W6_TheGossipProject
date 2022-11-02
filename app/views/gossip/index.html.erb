@@ -1,0 +1,28 @@
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">Bienvenue sur The Gossip Project ! 🤫</h1>
+    <p class="col-md-8 fs-4">Ici c'est notre super site de potins, il est chouette, non ?</p>
+  </div>
+</div>
+
+<h3>Voici les potins dont nous disposons dans notre base de donnée:</h3><br>
+
+<% @gossips.sort.each do |gossip| %>
+  <div class="card bg-light" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= gossip.title %></h5>
+      <p class="card-text">Écrit par: <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
+      <p class="card-text">Commentaire(s): <%= gossip.comments.count %></p>
+      <%= button_to "Lire ce gossip", gossip_path(gossip.id), :method => "get" %>
+    </div>
+  </div>
+  <hr/>
+<% end %>
+
+<% puts "$"*30 %>
+<% puts "param: #{params}" %>
+<% puts "$"*30 %>
+<% puts "session: #{session[:user_id]}" %>
+<% puts "$"*30 %>
+<% puts "current_user: #{current_user}" %>
+<% puts "$"*30 %>

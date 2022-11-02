@@ -1,0 +1,34 @@
+<h1>Voici le gossip numéro <%= @gossip.id %>:</h1>
+<p>
+  Auteur : <%= link_to "#{@author.first_name}", user_path(@author.id) %><br/>
+  Ville: <%= link_to "#{@author.city.name}", city_path(@author.city_id) %>
+</p>
+<p>
+  Titre du gossip : <%= @gossip.title %><br/>
+  Contenu du gossip : <%= @gossip.content %><br/>
+</p>
+<p>
+  Date de création: <%= @gossip.created_at %><br/>
+</p>
+<p>
+<% if current_user == @author %>
+  <%= button_to "Modifier ce gossip", edit_gossip_path(@gossip.id), :method => "get" %><br>
+  <%= button_to "Supprimer ce gossip", gossip_path(@gossip), :method => "delete" %><br>
+<% end %>
+  <%= button_to "Écrire un commentaire", new_gossip_comment_path(@gossip.id), :method => "get" %>
+</p>
+<p>
+<h3>Commentaires:</h3>
+</p>
+<% @gossip.comments.sort.each do |comment| %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= comment.content %></h5>
+      <p class="card-text">Écrit par: <%= link_to "#{comment.user.first_name}", user_path(comment.user.id) %></p>
+      <% if current_user.id == comment.user_id %>
+        <%= button_to "Modifier ou supprimer ce commentaire", edit_gossip_comment_path(@gossip.id, comment.id), :method => "get" %>
+      <% end %>    
+    </div>
+  </div>
+  <hr/>
+<% end %>
