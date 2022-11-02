@@ -25,9 +25,11 @@
     <div class="card-body">
       <h5 class="card-title"><%= comment.content %></h5>
       <p class="card-text">Écrit par: <%= link_to "#{comment.user.first_name}", user_path(comment.user.id) %></p>
-      <% if current_user.id == comment.user_id %>
-        <%= button_to "Modifier ou supprimer ce commentaire", edit_gossip_comment_path(@gossip.id, comment.id), :method => "get" %>
-      <% end %>    
+      <% if current_user %>
+        <% if current_user.id == comment.user_id %>
+          <%= button_to "Modifier ou supprimer ce commentaire", edit_gossip_comment_path(@gossip.id, comment.id), :method => "get" %>
+        <% end %>    
+      <% end %>
     </div>
   </div>
   <hr/>
