@@ -18,13 +18,22 @@ class UserController < ApplicationController
     end
     @cities = City.all
 
+    cities_name = []
+    City.all.each do |city|
+      cities_name << city.name
+    end
+
+    unless cities_name.include?(City.find_by(name: params[:city]))
+      City.create(name: params[:city], zip_code: Faker::Address.zip_code)
+    end
+
     @user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
       password: params[:password],
       age: params[:age],
-      city_id: params[:city].to_i,
+      city_id: City.find_by(name: params[:city]).id,
       description: params[:description]
     )
     

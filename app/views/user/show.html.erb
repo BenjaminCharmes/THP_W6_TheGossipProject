@@ -1,17 +1,17 @@
 <h1>Bienvenue sur la page de <%= @user.first_name %> !</h1>
 <p>
-Nom: <%= @user.first_name + " " + @user.last_name %>
+<strong>Nom:</strong> <%= @user.first_name + " " + @user.last_name %>
 </p>
 <p>
-Description: <%= @user.description %>
+<strong>Description:</strong> <%= @user.description %>
 </p>
 <p>
-Email: <%= @user.email %><br/>
-Âge: <%= @user.age %> ans<br/>
-Ville: <%= link_to "#{@user.city.name}", city_path(@user.city_id) %>
+<strong>Email:</strong> <%= @user.email %><br/>
+<strong>Âge:</strong> <%= @user.age %> ans<br/>
+<strong>Ville:</strong> <%= link_to "#{@user.city.name}", city_path(@user.city_id) %>
 </p>
 <p>
-Créé le: <%= @user.created_at %>
+<strong>Créé le:</strong> <%= @user.created_at %>
 </p>
 <% if current_user == @user %>
   <%= button_to "Modifier cet utilisateur", edit_user_path(@user.id), :method => "get" %><br>

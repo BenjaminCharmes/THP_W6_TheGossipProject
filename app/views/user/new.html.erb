@@ -37,7 +37,7 @@
   <br/> <br/>
 
   <%= label_tag 'Ville:' %>
-  <%= select_tag 'city', options_for_select(@cities.collect{ |u| [u.name, u.id] }) %>
+  <%= text_field_tag 'city' %>
   <br/> <br/>
 
   <%= label_tag 'Description:' %>

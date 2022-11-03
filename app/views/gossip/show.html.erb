@@ -1,12 +1,12 @@
 <h1>Voici le gossip numéro <%= @gossip.id %>:</h1>
 <p>
-  Auteur : <%= link_to "#{@author.first_name}", user_path(@author.id) %><br/>
-  Ville: <%= link_to "#{@author.city.name}", city_path(@author.city_id) %>
+  <strong>Auteur:</strong> <%= link_to "#{@author.first_name}", user_path(@author.id) %><br/>
+  <strong>Ville:</strong> <%= link_to "#{@author.city.name}", city_path(@author.city_id) %>
 </p>
 <p>
-  Titre du gossip : <%= @gossip.title %><br/>
-  Contenu du gossip : <%= @gossip.content %><br/>
-  Tag: <% @gossip.tags.each do |tag| %>
+  <strong>Titre du gossip:</strong> <%= @gossip.title %><br/>
+  <strong>Contenu du gossip:</strong> <%= @gossip.content %><br/>
+  <strong>Tag:</strong> <% @gossip.tags.each do |tag| %>
         <%= tag.title %>
       <% end %>
   <br/>
@@ -22,7 +22,7 @@
   <%= button_to "Écrire un commentaire", new_gossip_comment_path(@gossip.id), :method => "get" %>
 </p>
 <div>
-<h3>Likes: <%= @gossip.likes.count %></h3>
+<h3><strong>Likes:</strong> <%= @gossip.likes.count %></h3>
 <% if current_user %>
   <% if log_in(current_user) && current_user.likes.include?(Like.find_by(likeable: @gossip, user: current_user)) %>
   <%= button_to "Je n'aime plus", like_path(Like.find_by(likeable: @gossip, user: current_user)), :method => "delete" %><br>
