@@ -24,6 +24,10 @@
   <%= text_field_tag 'content', @gossip.content %>
   <br/> <br/>
 
+  <%= label_tag 'Tag:' %>
+  <%= select_tag 'tag', options_from_collection_for_select(@tags, 'id', 'title', @tag.id) %>
+  <br/> <br/>
+
   <%= submit_tag "Envoyer le formulaire" %>
 
 <% end %>

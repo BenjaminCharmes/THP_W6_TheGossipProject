@@ -18,7 +18,7 @@
         </div>
         <div class="col">
           <h5>Commentaire(s): <%= gossip.comments.count %></h5>
-          <h5>Likes: <%= gossip.likes.count %></h5>
+          <p><h5>Likes: <%= gossip.likes.count %></h5></p>
           <% if current_user %>
             <% if log_in(current_user) && current_user.likes.include?(Like.find_by(likeable: gossip, user: current_user)) %>
             <%= button_to "Je n'aime plus", like_path(Like.find_by(likeable: gossip, user: current_user)), :method => "delete" %><br>

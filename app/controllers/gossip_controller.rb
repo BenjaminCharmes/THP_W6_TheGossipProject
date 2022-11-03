@@ -12,10 +12,10 @@ class GossipController < ApplicationController
   end
 
   def new
+    @tags = Tag.all
   end
 
   def create
-    
     @gossip = Gossip.new(
       title: params[:title],
       content: params[:content],
@@ -23,6 +23,7 @@ class GossipController < ApplicationController
     )
 
     if @gossip.save
+      JoinTableGossipTag.create(gossip_id: @gossip.id, tag_id: params[:tag].to_i)
       redirect_to root_path
     else
       render :new
@@ -31,12 +32,17 @@ class GossipController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
+    @tags = Tag.all
+    @tag = Tag.find(JoinTableGossipTag.find_by(gossip_id: @gossip.id).tag_id)
   end
 
   def update
     @gossip = Gossip.find(params[:id])
+    
     if current_user.id == @gossip.user_id
       if @gossip.update(title: params[:title], content: params[:content])
+        @tag_to_update = JoinTableGossipTag.find_by(gossip_id: @gossip.id)
+        @tag_to_update.update(tag_id: params[:tag].to_i)
         redirect_to @gossip
       else
         render :edit

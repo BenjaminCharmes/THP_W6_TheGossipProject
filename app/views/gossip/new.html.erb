@@ -24,6 +24,10 @@
   <%= text_field_tag 'content' %>
   <br/> <br/>
 
+  <%= label_tag 'Tag:' %>
+  <%= select_tag 'tag', options_for_select(@tags.collect{ |u| [u.title, u.id] }) %>
+  <br/> <br/>
+
   <%= submit_tag "Envoyer le formulaire" %>
 
 <% end %>
