@@ -14,15 +14,16 @@
       <p class="card-text">Écrit par: <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
       <p class="card-text">Commentaire(s): <%= gossip.comments.count %></p>
       <%= button_to "Lire ce gossip", gossip_path(gossip.id), :method => "get" %>
+      <h3>Likes:</h3>
+      <p><%= gossip.likes.count %></p>
+      <% if current_user %>
+        <% if log_in(current_user) && current_user.likes.include?(Like.find_by(likeable: gossip, user: current_user)) %>
+        <%= button_to "Je n'aime plus", like_path(Like.find_by(likeable: gossip, user: current_user)), :method => "delete" %><br>
+        <% else %>
+        <%= link_to "J'aime", new_like_path(likeable_id: gossip.id, likeable_type: 'Gossip') %>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <hr/>
 <% end %>
-
-<% puts "$"*30 %>
-<% puts "param: #{params}" %>
-<% puts "$"*30 %>
-<% puts "session: #{session[:user_id]}" %>
-<% puts "$"*30 %>
-<% puts "current_user: #{current_user}" %>
-<% puts "$"*30 %>

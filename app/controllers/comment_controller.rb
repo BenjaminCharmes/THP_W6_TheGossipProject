@@ -11,7 +11,7 @@ class CommentController < ApplicationController
     if @comment.save
       redirect_to Gossip.find(params[:gossip_id])
     else
-      redirect_to Gossip.find(params[:gossip_id])
+      render :new
     end
   end
 
@@ -23,7 +23,7 @@ class CommentController < ApplicationController
     @comment = Comment.find(params[:id])
 
     if @comment.update(content: params[:content])
-      redirect_to @gossip
+      redirect_to Gossip.find(params[:gossip_id])
     else
       render :edit
     end

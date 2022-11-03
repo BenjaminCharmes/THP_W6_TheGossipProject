@@ -13,3 +13,7 @@ Ville: <%= link_to "#{@user.city.name}", city_path(@user.city_id) %>
 <p>
 Créé le: <%= @user.created_at %>
 </p>
+<% if current_user == @user %>
+  <%= button_to "Modifier cet utilisateur", edit_user_path(@user.id), :method => "get" %><br>
+  <%= button_to "Supprimer cet utilisateur", user_path(@user), :method => "delete" %><br>
+<% end %>

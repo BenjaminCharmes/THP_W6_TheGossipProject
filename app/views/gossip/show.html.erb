@@ -17,6 +17,17 @@
 <% end %>
   <%= button_to "Écrire un commentaire", new_gossip_comment_path(@gossip.id), :method => "get" %>
 </p>
+<div>
+<h3>Likes:</h3>
+<p><%= @gossip.likes.count %></p>
+<% if current_user %>
+  <% if log_in(current_user) && current_user.likes.include?(Like.find_by(likeable: gossip, user: current_user)) %>
+  <%= button_to "Je n'aime plus", like_path(Like.find_by(likeable: gossip, user: current_user)), :method => "delete" %><br>
+  <% else %>
+  <%= link_to "J'aime", new_like_path(likeable_id: gossip.id, likeable_type: 'Gossip') %>
+  <% end %>
+<% end %>
+</div>
 <p>
 <h3>Commentaires:</h3>
 </p>
@@ -34,3 +45,7 @@
   </div>
   <hr/>
 <% end %>
+
+  <% puts "$"*30
+  puts params
+  puts "$"*30 %>

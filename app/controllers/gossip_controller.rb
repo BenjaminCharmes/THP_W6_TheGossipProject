@@ -12,13 +12,6 @@ class GossipController < ApplicationController
   end
 
   def new
-    puts "$"*30
-    puts params
-    puts "$"*30
-    puts session
-    puts "$"*30
-    puts @user
-    puts "$"*30
   end
 
   def create
@@ -41,9 +34,8 @@ class GossipController < ApplicationController
   end
 
   def update
+    @gossip = Gossip.find(params[:id])
     if current_user.id == @gossip.user_id
-      @gossip = Gossip.find(params[:id])
-
       if @gossip.update(title: params[:title], content: params[:content])
         redirect_to @gossip
       else
