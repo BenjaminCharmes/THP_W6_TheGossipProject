@@ -55,8 +55,8 @@ class GossipController < ApplicationController
   end
 
   def destroy
+    @gossip = Gossip.find(params[:id])
     if current_user.id == @gossip.user_id
-      @gossip = Gossip.find(params[:id])
       @gossip.destroy
       redirect_to root_path
     else
