@@ -8,22 +8,27 @@
 <h3>Voici les potins dont nous disposons dans notre base de donnée:</h3><br>
 
 <% @gossips.sort.each do |gossip| %>
-  <div class="card bg-light" style="width: 18rem;">
+  <div class="card bg-light" style="width: 25rem;">
     <div class="card-body">
-      <h5 class="card-title"><%= gossip.title %></h5>
-      <p class="card-text">Écrit par: <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
-      <p class="card-text">Commentaire(s): <%= gossip.comments.count %></p>
-      <%= button_to "Lire ce gossip", gossip_path(gossip.id), :method => "get" %>
-      <h3>Likes:</h3>
-      <p><%= gossip.likes.count %></p>
-      <% if current_user %>
-        <% if log_in(current_user) && current_user.likes.include?(Like.find_by(likeable: gossip, user: current_user)) %>
-        <%= button_to "Je n'aime plus", like_path(Like.find_by(likeable: gossip, user: current_user)), :method => "delete" %><br>
-        <% else %>
-        <%= link_to "J'aime", new_like_path(likeable_id: gossip.id, likeable_type: 'Gossip') %>
-        <% end %>
-      <% end %>
+        <div class="row">
+        <div class="col">
+          <h5 class="card-title"><%= gossip.title %></h5>
+          <p class="card-text">Écrit par: <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
+          <%= button_to "Lire ce gossip", gossip_path(gossip.id), :method => "get" %>
+        </div>
+        <div class="col">
+          <h5>Commentaire(s): <%= gossip.comments.count %></h5>
+          <h5>Likes: <%= gossip.likes.count %></h5>
+          <% if current_user %>
+            <% if log_in(current_user) && current_user.likes.include?(Like.find_by(likeable: gossip, user: current_user)) %>
+            <%= button_to "Je n'aime plus", like_path(Like.find_by(likeable: gossip, user: current_user)), :method => "delete" %><br>
+            <% else %>
+            <%= link_to "J'aime", new_like_path(likeable_id: gossip.id, likeable_type: 'Gossip') %>
+            <% end %>
+          <% end %>
+        </div>
+        </div>
+      </div>
     </div>
-  </div>
   <hr/>
 <% end %>
