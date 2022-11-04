@@ -23,7 +23,7 @@ class UserController < ApplicationController
       cities_name << city.name
     end
 
-    unless cities_name.include?(City.find_by(name: params[:city]))
+    unless cities_name.include?(City.find_by(name: params[:city]).name)
       City.create(name: params[:city], zip_code: Faker::Address.zip_code)
     end
 
