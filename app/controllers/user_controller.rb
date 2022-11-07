@@ -18,12 +18,7 @@ class UserController < ApplicationController
     end
     @cities = City.all
 
-    cities_name = []
-    City.all.each do |city|
-      cities_name << city.name
-    end
-
-    unless cities_name.include?(City.find_by(name: params[:city]).name)
+    unless City.find_by(name: params[:city]).name
       City.create(name: params[:city], zip_code: Faker::Address.zip_code)
     end
 

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   
   # Controller Likes
   resources 'likes', only: [:new, :destroy]
-
+  fly ssh console
   # URL cachée
   get '/welcome/:first_name', to: 'welcome#home', as: 'welcome_home'
 
